@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CDUB’s Apps Creation | East Rome Made Me</title>
+  <meta name="description" content="CDUB’s Apps Creation — custom Android apps. East Rome Made Me — a real-life story about keeping faith through highs and lows." />
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --muted:#9fb0d0;
+      --text:#eaf0ff;
+      --line:rgba(255,255,255,.08);
+      --accent:#6ea8ff;
+      --accent2:#7dffb2;
+      --shadow: 0 18px 45px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1100px;
+      --pad: clamp(18px, 2.2vw, 26px);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(110,168,255,.25), transparent 60%),
+                  radial-gradient(900px 700px at 100% 10%, rgba(125,255,178,.14), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding: 24px var(--pad) 64px;}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,23,.65);
+      border-bottom:1px solid var(--line);
+    }
+    .nav .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding: 12px var(--pad);
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 25px rgba(110,168,255,.25);
+    }
+    .links{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+    .links a{
+      padding:8px 10px; border-radius:12px;
+      color:var(--muted);
+      border:1px solid transparent;
+    }
+    .links a:hover{border-color:var(--line); color:var(--text)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 12px 14px; border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      box-shadow: 0 10px 25px rgba(0,0,0,.18);
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); transition:.18s ease; border-color: rgba(110,168,255,.35)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(110,168,255,.95), rgba(125,255,178,.75));
+      color:#09121f;
+      border: none;
+      font-weight:700;
+    }
+
+    .hero{
+      padding: 46px 0 22px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .links{display:none}
+    }
+    .hero-card{
+      border:1px solid var(--line);
+      background: rgba(17,24,42,.65);
+      border-radius: var(--radius);
+      padding: clamp(18px, 3vw, 28px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(500px 180px at 30% 0%, rgba(110,168,255,.18), transparent 65%),
+                  radial-gradient(380px 240px at 110% 20%, rgba(125,255,178,.12), transparent 55%);
+      pointer-events:none;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(28px, 4.2vw, 46px);
+      line-height:1.12;
+      letter-spacing:-.6px;
+      position:relative;
+    }
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size: clamp(15px, 1.7vw, 18px);
+      position:relative;
+    }
+    .cta-row{display:flex; gap:10px; flex-wrap:wrap; position:relative}
+    .pill-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; position:relative}
+    .pill{
+      padding: 8px 10px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .side{display:grid; gap:14px;}
+    .mini{
+      border:1px solid var(--line);
+      background: rgba(17,24,42,.55);
+      border-radius: var(--radius);
+      padding: 16px 16px 14px;
+      box-shadow: var(--shadow);
+    }
+    .mini h3{margin:0 0 6px; font-size:16px}
+    .mini p{margin:0; color:var(--muted); font-size:14px}
+    .mini .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+    .section{padding: 28px 0 0}
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+      margin: 0 0 14px;
+    }
+    .section-head h2{margin:0; font-size:22px; letter-spacing:-.2px}
+    .section-head p{margin:0; color:var(--muted)}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 900px){.grid{grid-template-columns: 1fr}}
+    .card{
+      border:1px solid var(--line);
+      background: rgba(17,24,42,.55);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card h3{margin:0 0 8px; font-size:18px}
+    .card p{margin:0 0 12px; color:var(--muted); font-size:14px}
+    .thumb{
+      height: 150px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(110,168,255,.25), rgba(125,255,178,.15)),
+        radial-gradient(400px 220px at 20% 0%, rgba(255,255,255,.12), transparent 55%),
+        rgba(255,255,255,.03);
+      margin-bottom: 12px;
+      display:flex; align-items:center; justify-content:center;
+      color: rgba(234,240,255,.8);
+      font-weight:800;
+      letter-spacing:.3px;
+      text-align:center;
+      padding:12px;
+    }
+    .meta{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px}
+    .tag{
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--line);
+      padding:6px 10px; border-radius:999px;
+      background: rgba(255,255,255,.03);
+    }
+    .card .actions{display:flex; gap:10px; flex-wrap:wrap}
+    .divider{margin: 26px 0 0; height:1px; background: var(--line);}
+
+    .about{display:grid; grid-template-columns: 1fr 1fr; gap:14px;}
+    @media (max-width: 900px){.about{grid-template-columns:1fr}}
+    .list{margin:0; padding-left: 18px; color:var(--muted)}
+    .list li{margin:8px 0}
+    .footer{
+      margin-top: 36px;
+      padding-top: 18px;
+      border-top:1px solid var(--line);
+      color: var(--muted);
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      font-size: 13px;
+    }
+    input, textarea{
+      width:100%;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 14px;
+      padding: 12px 12px;
+      color: var(--text);
+      outline:none;
+    }
+    textarea{min-height: 120px; resize: vertical}
+    label{display:block; font-size: 13px; color: var(--muted); margin: 10px 0 6px}
+    .note{font-size:12px; color: var(--muted); margin-top: 10px}
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-size:14px; opacity:.95;">CDUB’s Apps Creation</div>
+          <div style="font-size:12px; color:var(--muted); margin-top:-2px;">Apps • Book</div>
+        </div>
+      </div>
+
+      <div class="links" aria-label="Navigation links">
+        <a href="#apps">Apps</a>
+        <a href="#book">Book</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <a class="btn primary" href="#contact">Work With Me</a>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="hero" id="top">
+      <div class="hero-card">
+        <h1>Apps built with purpose — and a story rooted in faith.</h1>
+        <p class="sub">
+          Welcome to <strong>CDUB’s Apps Creation</strong>. I build Android apps and share my life journey in
+          <strong>East Rome Made Me</strong> — how I kept faith through highs and lows.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#apps">Explore App Services</a>
+          <a class="btn" href="#book">Buy the Book</a>
+          <a class="btn" href="#contact">Contact Me</a>
+        </div>
+
+        <div class="pill-row" aria-label="Highlights">
+          <span class="pill">Android App Development</span>
+          <span class="pill">Custom UI + Animation</span>
+          <span class="pill">Faith Through Highs & Lows</span>
+        </div>
+      </div>
+
+      <div class="side">
+        <div class="mini">
+          <h3>Need an app built?</h3>
+          <p>I can help take your idea from a simple plan to a real Android app.</p>
+          <div class="row">
+            <a class="btn" href="#contact">Get a Quote</a>
+            <a class="btn" href="#apps">See What I Build</a>
+          </div>
+        </div>
+
+        <div class="mini">
+          <h3>My Book</h3>
+          <p><strong>East Rome Made Me</strong> — a real-life story about keeping faith through highs and lows.</p>
+          <div class="row">
+            <a class="btn" href="#book">Book Details</a>
+            <a class="btn" href="https://a.co/d/0c8k3L9W" target="_blank" rel="noopener">Amazon</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- APPS -->
+    <section class="section" id="apps">
+      <div class="section-head">
+        <div>
+          <h2>CDUB’s Apps Creation</h2>
+          <p>Custom Android apps, creative tools, and helpful utilities.</p>
+        </div>
+        <a class="btn" href="#contact">Start a Project</a>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="thumb">Custom Android Apps</div>
+          <h3>App Development Services</h3>
+          <div class="meta">
+            <span class="tag">Android Studio</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">Launch Support</span>
+          </div>
+          <p>
+            I build Android apps from idea → design → working app. Great for creators, small businesses, and new app ideas.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="#contact">Request a Quote</a>
+            <a class="btn" href="#contact" onclick="document.getElementById('message').value='I want to build an Android app. Here’s my idea: '; return false;">Message Template</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">Creative Utility Apps</div>
+          <h3>Fun + Useful Apps</h3>
+          <div class="meta">
+            <span class="tag">Custom Photos</span>
+            <span class="tag">Overlays</span>
+            <span class="tag">Animations</span>
+          </div>
+          <p>
+            I create apps that feel personal — like customization, visual effects, and tools people actually enjoy using.
+          </p>
+          <div class="actions">
+            <a class="btn" href="#contact">Build One With Me</a>
+            <a class="btn" href="#contact" onclick="document.getElementById('message').value='I want an app like a customization/utility app. Here’s what it should do: '; return false;">Send Idea</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">Collabs</div>
+          <h3>Partnerships</h3>
+          <div class="meta">
+            <span class="tag">Co-Create</span>
+            <span class="tag">Build in Public</span>
+            <span class="tag">Brand Deals</span>
+          </div>
+          <p>
+            If you have a strong idea and want to partner, let’s talk and see if it’s a good fit.
+          </p>
+          <div class="actions">
+            <a class="btn" href="#contact">Pitch Your Idea</a>
+            <a class="btn" href="mailto:Lilcliffhonda1990@gmail.com?subject=CDUB%27s%20Apps%20Creation%20-%20Collaboration">Email Me</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- BOOK -->
+    <section class="section" id="book">
+      <div class="section-head">
+        <div>
+          <h2>Book: East Rome Made Me</h2>
+          <p>A real-life story about keeping faith through highs and lows.</p>
+        </div>
+        <a class="btn primary" href="https://a.co/d/0c8k3L9W" target="_blank" rel="noopener">Buy on Amazon</a>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="thumb">EAST ROME MADE ME<br/>Book Cover Here</div>
+          <h3>East Rome Made Me</h3>
+          <div class="meta">
+            <span class="tag">Memoir</span>
+            <span class="tag">Faith</span>
+            <span class="tag">Growth</span>
+          </div>
+          <p>
+            A little insight into my life — and how I kept faith even when I went through highs and lows.
+            This book is for anybody trying to stay solid while life keeps testing them.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="https://a.co/d/0c8k3L9W" target="_blank" rel="noopener">Buy on Amazon</a>
+            <a class="btn" href="https://a.co/d/0c8k3L9W" target="_blank" rel="noopener">View Listing</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>What you’ll get from this book</h3>
+          <ul class="list">
+            <li>Real moments and honest lessons from the journey</li>
+            <li>How faith can keep you grounded when life changes</li>
+            <li>Motivation to keep pushing even when you feel stuck</li>
+          </ul>
+          <div class="note">Add a short quote/testimonial here when you have one.</div>
+        </article>
+
+        <article class="card">
+          <h3>Interviews / Speaking</h3>
+          <p>
+            Want me on your platform or event? I’ll speak on faith, growth, and building your life with purpose.
+          </p>
+          <div class="actions">
+            <a class="btn" href="#contact">Book Me</a>
+            <a class="btn" href="mailto:Lilcliffhonda1990@gmail.com?subject=East%20Rome%20Made%20Me%20-%20Interview%20Request">Email Request</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT + CONTACT -->
+    <section class="section" id="about">
+      <div class="section-head">
+        <div>
+          <h2>About</h2>
+          <p>Quick intro for people who just found you.</p>
+        </div>
+      </div>
+
+      <div class="about">
+        <article class="card">
+          <h3>Who I am</h3>
+          <p>
+            I’m Charles Wright — creator behind <strong>CDUB’s Apps Creation</strong>.
+            I build Android apps and wrote <strong>East Rome Made Me</strong>, a real story about keeping faith through highs and lows.
+            I’m big on growth, discipline, and putting in real work even when life gets heavy.
+          </p>
+          <div class="actions">
+            <a class="btn" href="#apps">Apps</a>
+            <a class="btn" href="#book">Book</a>
+            <a class="btn" href="#contact">Contact</a>
+          </div>
+        </article>
+
+        <article class="card" id="contact">
+          <h3>Contact / Work With Me</h3>
+          <p>Send a message about app builds, speaking, or collaborations.</p>
+
+          <form onsubmit="return openMail(event)">
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="Your name" required />
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@email.com" required />
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me what you want to build or promote..." required></textarea>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+              <button class="btn primary" type="submit">Send Email</button>
+              <a class="btn" href="mailto:Lilcliffhonda1990@gmail.com?subject=CDUB%27s%20Apps%20Creation%20-%20Inquiry">Email Me Direct</a>
+              <a class="btn" href="#top">Back to Top</a>
+            </div>
+
+            <div class="note" id="formNote">
+              This opens the visitor’s email app and sends to <strong>Lilcliffhonda1990@gmail.com</strong>.
+              If you want a form that sends automatically (no email app), tell me and I’ll set it up.
+            </div>
+          </form>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> CDUB’s Apps Creation. All rights reserved.</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a href="mailto:Lilcliffhonda1990@gmail.com?subject=CDUB%27s%20Apps%20Creation%20-%20Inquiry">Email</a>
+        <span style="opacity:.4;">•</span>
+        <a href="https://a.co/d/0c8k3L9W" target="_blank" rel="noopener">Book</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function openMail(e){
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const to = "Lilcliffhonda1990@gmail.com";
+      const subject = encodeURIComponent("CDUB's Apps Creation - New Inquiry");
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n— Sent from CDUB’s Apps Creation website`
+      );
+
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      return false;
+    }
+  </script>
+</body>
+</html>
